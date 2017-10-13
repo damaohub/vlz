@@ -1,4 +1,4 @@
-# wlz.v2
+# wlz.v1
 
 > A Vue.js project
 
