@@ -44,7 +44,6 @@
     data () {
       return {
         minBtnText: '发送验证码',
-        minBtnDisabled: false,
         minBtnTimer: 60,
         showLoging: false,
         form: {
@@ -60,7 +59,18 @@
     created:function () {
       //this.getUsers();
     },
+
     computed: {
+
+      minBtnDisabled: {
+        get: function () {
+          return (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
+        },
+        set: function(newValue) {
+          return newValue;
+        }
+      },
+
       isDisabled:  {
         get: function () {
           if(this.form.Phone.length!=0
@@ -76,7 +86,6 @@
         set: function (newValue) {
           return newValue;
         }
-
       }
     },
     methods: {

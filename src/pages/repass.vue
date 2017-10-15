@@ -54,9 +54,17 @@
       }
     },
     created:function () {
-      //this.getUsers();
     },
     computed: {
+      minBtnDisabled: {
+        get: function () {
+          return (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
+        },
+        set: function(newValue) {
+          return newValue;
+        }
+      },
+
       isDisabled:  {
         get: function () {
           if(this.form.Phone.length!=0
