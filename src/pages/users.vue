@@ -133,10 +133,10 @@
         showCount: true,
 
         bulletinContent: '',
-        bulletinSpeed: 5,
+        bulletinSpeed: 8,
 
-        onlineUsers: '',
-        totalUsers: ''
+        onlineUsers: 0,
+        totalUsers: 0
 
       }
     },
