@@ -43,7 +43,6 @@
     data () {
       return {
         minBtnText: '发送验证码',
-        minBtnDisabled: false,
         minBtnTimer: 60,
         showLoging: false,
         form: {
