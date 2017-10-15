@@ -54,6 +54,7 @@
       }
     },
     created:function () {
+      //this.getUsers();
     },
     computed: {
       minBtnDisabled: {
@@ -64,7 +65,6 @@
           return newValue;
         }
       },
-
       isDisabled:  {
         get: function () {
           if(this.form.Phone.length!=0
