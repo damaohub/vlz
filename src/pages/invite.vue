@@ -12,7 +12,7 @@
       <div slot="content" class="card-padding">
         <p>可以扫描二维码或者长按复制下面链接，:</p>
         <p class="red">{{imgCode}}</p>
-      </div>
+      </div>Mi
     </card>
     <divider></divider>
 
