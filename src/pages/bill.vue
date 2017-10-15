@@ -18,8 +18,6 @@
          </div>
           <div slot="value">
             <span style="color: #000;">{{item.Integral}}</span>
-            <br>
-            <small style="font-size: 12px;">余额：{{$store.state.userInfo.TotalIntegral}}</small>
           </div>
         </cell>
       </group
