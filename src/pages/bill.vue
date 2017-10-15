@@ -10,9 +10,16 @@
       <span style="text-align: center;" v-if="noData">暂无数据</span>
       <group >
 
-        <cell v-for="(item, key) in list" :key="key" :title="item.Status==1?'提现正在审核...':'审核通过'" :inline-desc="item.PurseTime">
+        <cell v-for="(item, key) in list" :key="key"  :inline-desc="item.PurseTime">
+         <div slot="title">
+           <span v-if="item.Status==1" style="color: blue;">正在审核...</span>
+           <span v-if="item.Status==2" style="color: red;">提现拒绝</span>
+           <span v-if="item.Status==3" style="color: #1AAD19;">提现成功</span>
+         </div>
           <div slot="value">
-            <span class="red">{{item.Integral}}</span>
+            <span style="color: #000;">{{item.Integral}}</span>
+            <br>
+            <small style="font-size: 12px;">余额：{{$store.state.userInfo.TotalIntegral}}</small>
           </div>
         </cell>
       </group
@@ -34,7 +41,9 @@
     },
     data () {
       return {
+        TotalIntegral: this.$store.state.userInfo.TotalIntegral,
         list: [],
+        statusText: '',
         page: 0,
         pageEnd: false,
         noData: false
@@ -43,9 +52,7 @@
     created: function () {
       this.getList()
     },
-    computed: {
 
-    },
     methods: {
       getList () {
         axios.post('log-purse',{Token: this.$store.state.token,page: this.page},config)
@@ -89,7 +96,6 @@
         if(this.pageEnd == false){
           setTimeout(() => {
               this.page+=1;
-               console.log('record请求第'+this.page+'页')
               this.getList();
               //  this.pageEnd = true;
               setTimeout(() => {
