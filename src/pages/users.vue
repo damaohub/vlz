@@ -37,7 +37,7 @@
             <flexbox orient="vertical">
               <img :class="['userHeader',user.Status == 0?'toGrey':'']" :src="user.HeadImgUrl" :alt="user.Uin">
               <span :class="['line-stat',user.Status == 1?'online':'offline']"><i></i>{{user.Status == 1?'在线':'下线'}}</span>
-              <h3 class="userName">{{user.NickName}}</h3>
+              <h3 class="user-name">{{user.NickName}}</h3>
             </flexbox>
           </check-icon>
         </flexbox-item>
@@ -161,7 +161,6 @@
                     }else {
                       this.pageEnd = false;
                     }
-
                   }
                   this.users.push.apply(this.users,res.data.resdata);
                   this.getUserNumber();
@@ -489,7 +488,7 @@
   .flex-row-user{margin-top: 10px;}
 .vux-flexbox-item{width: 25%;position:relative;overflow: hidden;}
 .userHeader{width: 60%;max-width: 128px;border-radius: 50%;padding: 2px;border: 2px solid #d2d6de;font-size: 12px;}
-.userName{font-size: 1rem;}
+.user-name{font-size: 1rem;white-space: nowrap;text-overflow: clip;overflow: hidden;}
 .line-stat{color: #777;font-size: .8rem;display: block;}
 .line-stat i{display: inline-block;width: 8px;height: 8px;border-radius: 50%;margin-right: 5px;}
 .online{color: green;}
