@@ -7,13 +7,19 @@
     </x-header>
     <divider><h3 class="red">邀请码：{{InviteCode}}</h3></divider>
     <p style="text-align: center;"><small>下线注册需要上线邀请码</small></p>
-    <card style="text-align: center;">
-      <qrcode slot="header" :value="imgCode" type="img"></qrcode>
+    <card :header="{title:'扫码注册'}" :footer="{title: '下线注册页面'}" @on-click-footer="toShareLink">
       <div slot="content" class="card-padding">
-        <p>可以扫描二维码或者长按复制下面链接，:</p>
-        <p class="red">{{imgCode}}</p>
-      </div>Mi
+        <qrcode :value="imgCode" type="img"></qrcode>
+        <p>可以扫描二维码或者长按复制下面链接</p>
+        <p class="red">{{shareLink}}</p>
+      </div>
+      <!--<div slot="footer" class="weui-panel__ft">-->
+        <!--<a class="weui-cell weui-cell_access weui-cell_link" :href="shareLink">-->
+          <!--<div class="weui-cell__bd">下线注册页面</div>-->
+        <!--</a>-->
+      <!--</div>-->
     </card>
+
     <divider></divider>
 
     <card :header="{title:'推广详情'}" :footer="{title:'查看更多',link:'/invite/detail'}">
@@ -54,10 +60,16 @@
     },
     computed: {
       imgCode () {
-          return 'http://106.14.16.135/api/spread-qrcode?Spread=' + this.InviteCode
+          return 'http://106.14.16.135/api/spread-qrcode?Spread=' + this.InviteCode;
+      },
+      shareLink () {
+          return 'http://106.14.16.135/regist.html?InvitsCode=' +  this.InviteCode;
       }
     },
     methods: {
+      toShareLink () {
+         window.location.href = this.shareLink;
+      }
     }
   }
 </script>
@@ -74,6 +86,7 @@
   }
   .card-padding {
     padding: 15px;
+    text-align: center;
   }
   .card-demo-flex > div {
     flex: 1;
