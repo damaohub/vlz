@@ -75,6 +75,7 @@
                 text: res.data.resmsg,
                 type: 'success'
               });
+              this.$router.push('/bill');
             }else if(res.data.rescode===-1){
               this.$vux.toast.show({
                 text: res.data.resmsg,
