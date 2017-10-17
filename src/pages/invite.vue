@@ -9,15 +9,11 @@
     <p style="text-align: center;"><small>下线注册需要上线邀请码</small></p>
     <card :header="{title:'扫码注册'}" :footer="{title: '下线注册页面'}" @on-click-footer="toShareLink">
       <div slot="content" class="card-padding">
-        <qrcode :value="imgCode" type="img"></qrcode>
+        <qrcode :value="shareLink" type="img"></qrcode>
         <p>可以扫描二维码或者长按复制下面链接</p>
         <p class="red">{{shareLink}}</p>
       </div>
-      <!--<div slot="footer" class="weui-panel__ft">-->
-        <!--<a class="weui-cell weui-cell_access weui-cell_link" :href="shareLink">-->
-          <!--<div class="weui-cell__bd">下线注册页面</div>-->
-        <!--</a>-->
-      <!--</div>-->
+
     </card>
 
     <divider></divider>
@@ -59,9 +55,6 @@
       }
     },
     computed: {
-      imgCode () {
-          return 'http://106.14.16.135/api/spread-qrcode?Spread=' + this.InviteCode;
-      },
       shareLink () {
           return 'http://106.14.16.135/regist.html?InvitsCode=' +  this.InviteCode;
       }
