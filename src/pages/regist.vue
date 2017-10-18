@@ -134,6 +134,7 @@
               })
               var interval = setInterval( () => {
                 this.minBtnText= (this.minBtnTimer--)+'s后重新获取';
+                this.minBtnDisabled = true;
                 if(this.minBtnTimer==0){
                   window.clearInterval(interval);
                   this.minBtnTimer=60;

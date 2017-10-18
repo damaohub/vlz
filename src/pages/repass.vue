@@ -57,8 +57,8 @@
       //this.getUsers();
     },
 
-
     computed: {
+
 //      minBtnDisabled: {
 //        get: function () {
 //          return (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
@@ -120,44 +120,36 @@
 
       getMobileVerifyCode () {
         this.minBtnDisabled = true;
-        var interval = setInterval(() => {
+        axios.post('verify-code',{Phone: this.form.Phone},config)
+          .then((res) => {
+            console.log(res);
+            if(res.data.rescode === 0){
+              this.$vux.toast.show({
+                text: res.data.resmsg,
+                type: 'success'
+              })
+              var interval = setInterval(() => {
                 this.minBtnText= (this.minBtnTimer--)+'s后重新获取';
+                this.minBtnDisabled = true;
                 if(this.minBtnTimer==0){
                   window.clearInterval(interval);
                   this.minBtnTimer=60;
                   this.minBtnText='发送验证码';
-                  this.minBtnDisabled = true;
+                  this.minBtnDisabled=false;
                 }
               },1000)
+            }else {
+              this.$vux.toast.show({
+                text: res.data.resmsg,
+                type: 'warn'
+              });
+              this.minBtnDisabled = false;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
 
-
-//        axios.post('verify-code',{Phone: this.form.Phone},config)
-//          .then((res) => {
-//            if(res.data.rescode === 0){
-//              this.$vux.toast.show({
-//                text: res.data.resmsg,
-//                type: 'success'
-//              })
-//              var interval = setInterval(() => {
-//                this.minBtnText= (this.minBtnTimer--)+'s后重新获取';
-//                if(this.minBtnTimer==0){
-//                  window.clearInterval(interval);
-//                  this.minBtnTimer=60;
-//                  this.minBtnText='发送验证码';
-//                  this.minBtnDisabled=false;
-//                }
-//              },1000)
-//            }else {
-//              this.$vux.toast.show({
-//                text: res.data.resmsg,
-//                type: 'warn'
-//              })
-//            }
-//          })
-//          .catch((err) => {
-//            console.log(err);
-//          })
-        this.minBtnDisabled = false;
       },
 
       resetForm () {
