@@ -2,7 +2,7 @@
   <div class="users-container">
     <x-header slot="header"
               title="账号列表">
-      <a slot="overwrite-left" @click="toggleEdit()">{{editText}}</a>
+      <a slot="overwrite-left" @click="toggleEdit()" style="font-size: 16px">{{editText}}</a>
       <a v-show="!isEdit" slot = "right" @click="showOpts=true"><span class="iconfont icon-plus">&#xe6be;</span></a>
       <a v-show="isEdit" slot = "right" @click="del()">删除</a>
     </x-header>
@@ -502,7 +502,7 @@
 .add .vux-spinner{width: 100%;height: 100%;}
   .vux-check-icon .icons .weui-icon-circle{color: #1aad19;}
   .vux-check-icon .icons{position: absolute;z-index:99;}
-  .iconfont.icon-plus{font-size: 20px;padding-right: 0;}
+  .iconfont.icon-plus{font-size: 22px;padding-right: 0;}
   .pad{padding: 20px;}
   .weui-panel.panel-user{margin:0;}
   .card-user-content{padding: 5px 0;}
