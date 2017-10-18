@@ -4,8 +4,8 @@
               title="个人中心"
               :left-options="{showBack: false}">
     </x-header>
-    <scroller :on-refresh="refresh" style="padding-top: 44px;">
-    <blur :blur-amount=6 :url="url" :height=150>
+    <scroller :on-refresh="refresh" style="padding-top: 44px; padding-bottom: 55px;">
+    <blur :blur-amount=6 :url="url" :height="blurHeight">
     </blur>
 
       <div class="user-header"> <img :src="url" alt=""><p>{{Phone}}</p></div>
@@ -37,6 +37,7 @@
     <group>
       <cell title="退出登录" @click.native="logout()" is-link><span class="iconfont" slot="icon" style="color: #3996f2">&#xe62a;</span></cell>
     </group>
+      <div style="height: 145px"></div>
     </scroller>
   </div>
 </template>
@@ -61,7 +62,18 @@
         TotalIntegral: this.$store.state.userInfo.TotalIntegral,
         AllowPurse: this.$store.state.userInfo.AllowPurse,
         Phone: this.$store.state.userInfo.Phone,
-        isUpdating: false
+        isUpdating: false,
+
+      }
+    },
+    computed: {
+      blurHeight: {
+          get () {
+            return (document.body.clientHeight)*0.25;
+          },
+        set(newVal) {
+              return newVal;
+        }
       }
     },
     methods: {
