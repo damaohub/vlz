@@ -102,7 +102,7 @@
                 text: res.data.resmsg +'前去登录',
                 type: 'success'
               });
-
+              this.resetForm();
               this.$router.push('/login');
             }else if(res.data.rescode===-1){
               this.$vux.toast.show({
@@ -152,7 +152,15 @@
             console.log(err);
           })
         this.minBtnDisabled=false;
+      },
+
+      resetForm () {
+        let obj = this.form;
+        for(let i in obj ){
+            obj[i] = '';
+        }
       }
+
     }
   }
 </script>

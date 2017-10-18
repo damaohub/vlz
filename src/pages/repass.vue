@@ -42,6 +42,7 @@
     name: 'users',
     data () {
       return {
+        minBtnDisabled: false,
         minBtnText: '发送验证码',
         minBtnTimer: 60,
         showLoging: false,
@@ -55,15 +56,17 @@
     created:function () {
       //this.getUsers();
     },
+
+
     computed: {
-      minBtnDisabled: {
-        get: function () {
-          return (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
-        },
-        set: function(newValue) {
-          return newValue;
-        }
-      },
+//      minBtnDisabled: {
+//        get: function () {
+//          return (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
+//        },
+//        set: function(newValue) {
+//          return newValue;
+//        }
+//      },
       isDisabled:  {
         get: function () {
           if(this.form.Phone.length!=0
@@ -86,17 +89,15 @@
         this.showLoging = true;
         axios.post('repass',this.form,config)
           .then((res)=>{
+            console.log(res)
             this.isDisabled = false;
             this.showLoging = false;
             if(res.data.rescode===0){
-//              this.token = res.data.resdata.Token;
-//              this.$store.commit('isLogin',this.token);
-              //if(this.$store.state.token==null) return;
               this.$vux.toast.show({
                 text: res.data.resmsg + '前去登录',
                 type: 'success'
               });
-             // this.getUserInfo();
+              this.resetForm();
               this.$router.push('/login');
             }else if(res.data.rescode===-1){
               this.$vux.toast.show({
@@ -119,36 +120,52 @@
 
       getMobileVerifyCode () {
         this.minBtnDisabled = true;
-        axios.post('verify-code',{Phone: this.form.Phone},config)
-          .then((res) => {
-            if(res.data.rescode === 0){
-              this.$vux.toast.show({
-                text: res.data.resmsg,
-                type: 'success'
-              })
-              var interval = setInterval(() => {
+        var interval = setInterval(() => {
                 this.minBtnText= (this.minBtnTimer--)+'s后重新获取';
                 if(this.minBtnTimer==0){
                   window.clearInterval(interval);
                   this.minBtnTimer=60;
                   this.minBtnText='发送验证码';
-                  this.minBtnDisabled=false;
+                  this.minBtnDisabled = true;
                 }
               },1000)
-            }else {
-              this.$vux.toast.show({
-                text: res.data.resmsg,
-                type: 'warn'
-              })
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-        this.minBtnDisabled=false;
+
+
+//        axios.post('verify-code',{Phone: this.form.Phone},config)
+//          .then((res) => {
+//            if(res.data.rescode === 0){
+//              this.$vux.toast.show({
+//                text: res.data.resmsg,
+//                type: 'success'
+//              })
+//              var interval = setInterval(() => {
+//                this.minBtnText= (this.minBtnTimer--)+'s后重新获取';
+//                if(this.minBtnTimer==0){
+//                  window.clearInterval(interval);
+//                  this.minBtnTimer=60;
+//                  this.minBtnText='发送验证码';
+//                  this.minBtnDisabled=false;
+//                }
+//              },1000)
+//            }else {
+//              this.$vux.toast.show({
+//                text: res.data.resmsg,
+//                type: 'warn'
+//              })
+//            }
+//          })
+//          .catch((err) => {
+//            console.log(err);
+//          })
+        this.minBtnDisabled = false;
       },
 
-
+      resetForm () {
+        let obj = this.form;
+        for(let i in obj ){
+          obj[i] = '';
+        }
+      }
 
     }
   }

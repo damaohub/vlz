@@ -7,8 +7,8 @@
     </x-header>
 
       <group>
-        <x-input  name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile" required v-model="Phone" ><span slot="label" class="iconfont">&#xe602;</span></x-input>
-        <x-input  type="password" placeholder="请输入密码" :min="6" :max="6"  v-model="Password"><span slot="label" class="iconfont">&#xe61f;</span>&#xe61f;</x-input>
+        <x-input  name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"  v-model="Phone" ><span slot="label" class="iconfont">&#xe602;</span></x-input>
+        <x-input  type="password" placeholder="请输入密码" :min="6" :max="20"  v-model="Password"><span slot="label" class="iconfont">&#xe61f;</span>&#xe61f;</x-input>
       </group>
 
     <group>
@@ -78,6 +78,8 @@
                 text: res.data.resmsg,
                 type: 'success'
               });
+              this.Phone = "";
+              this.Password = "";
               this.getUserInfo();
               this.$router.push('/');
             }else if(res.data.rescode===-1){
