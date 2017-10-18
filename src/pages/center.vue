@@ -59,11 +59,8 @@
     data () {
       return {
         url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg',
-        TotalIntegral: this.$store.state.userInfo.TotalIntegral,
-        AllowPurse: this.$store.state.userInfo.AllowPurse,
         Phone: this.$store.state.userInfo.Phone,
         isUpdating: false,
-
       }
     },
     computed: {
@@ -71,8 +68,24 @@
           get () {
             return (document.body.clientHeight)*0.25;
           },
+          set(newVal) {
+                return newVal;
+          }
+      },
+      TotalIntegral: {
+          get () {
+              return this.$store.state.userInfo.TotalIntegral;
+          },
+          set(newVal) {
+            return newVal;
+          }
+      },
+      AllowPurse: {
+        get () {
+          return this.$store.state.userInfo.AllowPurse;
+        },
         set(newVal) {
-              return newVal;
+          return newVal;
         }
       }
     },
