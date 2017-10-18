@@ -4,8 +4,8 @@
               title="个人中心"
               :left-options="{showBack: false}">
     </x-header>
-    <scroller  style="padding-top: 44px;">
-    <blur :blur-amount=6 :url="url" :height=150 @click.native="getUserInfo()">
+    <scroller :on-refresh="refresh" style="padding-top: 44px;">
+    <blur :blur-amount=6 :url="url" :height=150>
     </blur>
 
       <div class="user-header"> <img :src="url" alt=""><p>{{Phone}}</p></div>
@@ -93,7 +93,14 @@
           .catch((err) => {
             console.log(err);
           })
-      }
+      },
+
+      refresh (done) {
+        setTimeout(() => {
+          this.getUserInfo();
+          done();
+        })
+      },
 
     }
   }
