@@ -4,8 +4,8 @@
               title="个人中心"
               :left-options="{showBack: false}">
     </x-header>
+    <scroller  style="padding-top: 44px;">
     <blur :blur-amount=6 :url="url" :height=150 @click.native="getUserInfo()">
-      <div class="center">点击背景图同步数据 <span class="iconfont icon-update">&#xe661;</span></div>
     </blur>
 
       <div class="user-header"> <img :src="url" alt=""><p>{{Phone}}</p></div>
@@ -37,7 +37,7 @@
     <group>
       <cell title="退出登录" @click.native="logout()" is-link><span class="iconfont" slot="icon" style="color: #3996f2">&#xe62a;</span></cell>
     </group>
-
+    </scroller>
   </div>
 </template>
 

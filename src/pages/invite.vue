@@ -5,6 +5,7 @@
               :left-options="{showBack: false}">
 
     </x-header>
+    <scroller style="padding-top: 44px;">
     <divider><h3 class="red">邀请码：{{InviteCode}}</h3></divider>
     <p style="text-align: center;"><small>下线注册需要上线邀请码</small></p>
     <card :header="{title:'扫码注册'}" :footer="{title: '下线注册页面'}" @on-click-footer="toShareLink">
@@ -32,7 +33,7 @@
     </div>
     </card>
 
-
+    </scroller>
   </div>
 </template>
 
