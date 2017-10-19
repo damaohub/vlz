@@ -8,7 +8,7 @@
       <group>
         <x-input title="手机号码"  placeholder="请输入手机号码" keyboard="number" is-type="china-mobile" required v-model="form.Phone" ></x-input>
         <x-input title="验证码" placeholder="请输入验证码" class="weui-vcode" required v-model="form.MobileVerifyCode"  >
-          <x-button slot="right" type="primary" mini :disabled="minBtnDisabled" @click.native="getMobileVerifyCode()">{{minBtnText}}</x-button>
+          <x-button slot="right" type="primary" mini :disabled="_minBtnDisabled || minBtnDisabled" @click.native="getMobileVerifyCode()">{{minBtnText}}</x-button>
         </x-input>
         <x-input title="密码" type="password" placeholder="请输入密码" required v-model="form.Password" ></x-input>
         <x-input title="邀请码" type="text" placeholder="请输入邀请码" v-model="form.InviteCode" ></x-input>
@@ -17,7 +17,7 @@
       </group>
 
     <group>
-      <x-button  @click.native="submit()" :disabled="isDisabled" type="primary">
+      <x-button  @click.native="submit()" :disabled="_isDisabled || isDisabled" type="primary">
         <span v-if="isDisabled&&showLoging">正在提交<inline-loading></inline-loading></span>
         <span v-else>注册</span>
       </x-button>
@@ -43,6 +43,8 @@
     name: 'users',
     data () {
       return {
+        isDisabled: true,
+        minBtnDisabled: true,
         minBtnText: '发送验证码',
         minBtnTimer: 60,
         showLoging: false,
@@ -62,16 +64,16 @@
 
     computed: {
 
-      minBtnDisabled: {
+      _minBtnDisabled: {
         get: function () {
-          return (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
+          return this.minBtnDisabled = (/^1[0-9]{10}$/.test(this.form.Phone)) ? false : true;
         },
         set: function(newValue) {
           return newValue;
         }
       },
 
-      isDisabled:  {
+      _isDisabled:  {
         get: function () {
           if(this.form.Phone.length!=0
             && this.form.MobileVerifyCode.length!=0
@@ -79,9 +81,9 @@
             &&this.form.Alipay.length!=0
             &&this.form.InviteCode.length!=0
             &&this.form.AlipayName.length!=0){
-              return false;
+              return this.isDisabled = false;
           }
-        return true;
+        return this.isDisabled = true;
         },
         set: function (newValue) {
           return newValue;

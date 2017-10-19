@@ -12,7 +12,7 @@
       </group>
 
     <group>
-      <x-button  @click.native="submit()" :disabled="isDisabled" type="primary">
+      <x-button  @click.native="submit()" :disabled="_isDisabled || isDisabled" type="primary">
         <span v-if="isDisabled&&showLoging">正在登录<inline-loading></inline-loading></span>
         <span v-else>登录</span>
       </x-button>
@@ -40,6 +40,7 @@
     name: 'users',
     data () {
       return {
+        isDisabled: true,
         showLoging: false,
         Phone:'',
         Password: '',
@@ -48,12 +49,12 @@
       }
     },
     computed: {
-      isDisabled:  {
+      _isDisabled:  {
           get: function () {
             if(this.Phone.length != 0 && this.Password.length != 0) {
-              return false;
+             return this.isDisabled = false;
             }
-            return true;
+            return this.isDisabled = true;
           },
           set: function (newValue) {
             return newValue;
