@@ -58,7 +58,7 @@
     },
     data () {
       return {
-        url: 'https://o3e85j0cv.qnssl.com/tulips-1083572__340.jpg',
+        url: '/static/tulips.jpg',
         Phone: this.$store.state.userInfo.Phone,
         isUpdating: false,
       }
