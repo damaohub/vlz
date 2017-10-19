@@ -408,9 +408,7 @@
         if(this.pageEnd == false){
           setTimeout(() => {
             this.page+=1;
-            console.log('请求第'+this.page+'页')
            this.getUsers();
-          //  this.pageEnd = true;
             setTimeout(() => {
               done();
             })
