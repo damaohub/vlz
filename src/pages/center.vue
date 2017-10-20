@@ -32,7 +32,7 @@
       <cell title="我要提现" link="/center/withdraw" is-link><span class="iconfont" slot="icon" style="color: #ffbe00;">&#xe615;</span></cell>
     </group>
     <group>
-      <cell title="联系客服" value="QQ:97107977" is-link><span class="iconfont" slot="icon" style="color: #0ec3ff">&#xe690;</span></cell>
+      <cell title="联系客服" value="QQ:97107977" @click.native="goQQ()" is-link><span class="iconfont" slot="icon" style="color: #0ec3ff">&#xe690;</span></cell>
     </group>
     <group>
       <cell title="退出登录" @click.native="logout()" is-link><span class="iconfont" slot="icon" style="color: #3996f2">&#xe62a;</span></cell>
@@ -90,7 +90,9 @@
       }
     },
     methods: {
-
+      goQQ () {
+        window.location.href="mqq://im/chat?chat_type=wpa&uin=97107977&version=1&src_type=web";
+      },
       logout () {
         this.$store.commit('isLogin',null);
         localStorage.removeItem('token');
