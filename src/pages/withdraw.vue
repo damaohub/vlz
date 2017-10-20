@@ -11,8 +11,8 @@
           <span slot='label' class="iconfont">&#xe601;</span>
         </x-input>
         <small style="color: #999;">提现金额最少5元</small>
-        <small style="color: #999; float: right">目前提现额度<span class="red">{{TotalIntegral}}</span> 元</small>
-        <x-button  @click.native="submit()" :disabled="isDisabled" type="primary">
+        <small style="color: #999; float: right">目前提现额度<span class="red">{{AllowPurse}}</span> 元</small>
+        <x-button  @click.native="submit()" :disabled="_isDisabled ||isDisabled" type="primary">
           提现<inline-loading v-if="isDisabled&&showLoging"></inline-loading>
         </x-button>
       </div>
@@ -35,18 +35,19 @@
     name: 'withdraw',
     data () {
       return{
+        isDisabled: true,
         Integral: '',
-        TotalIntegral: this.$store.state.userInfo.TotalIntegral,
+        AllowPurse: this.$store.state.userInfo.AllowPurse,
         showLoging: false
       }
     },
     computed: {
-      isDisabled:  {
+      _isDisabled:  {
         get: function () {
           if(this.Integral.length != 0) {
-            return false;
+            return this.isDisabled = false;
           }
-          return true;
+          return this.isDisabled = true;
         },
         set: function (newValue) {
           return newValue;
