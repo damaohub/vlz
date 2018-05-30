@@ -2,8 +2,8 @@
 
 > A Vue.js project
 
-##微粒赚 基于vux UI框架开发
-## Build Setup
+## 微粒赚 基于vux UI框架开发
+##  Build Setup
 
 ``` bash
 # install dependencies
